@@ -7,6 +7,15 @@ public class ExecutionResult {
 
 	String memoryStatus;
 	String memoryLog;
+	private String error;
+
+	
+	
+	public ExecutionResult(String ipAddress, String error) {
+		
+		this.ipAddress = ipAddress;
+		this.error = error;
+	}
 
 	public String getIpAddress() {
 		return ipAddress;
@@ -46,6 +55,14 @@ public class ExecutionResult {
 
 	public void setMemoryLog(String memoryLog) {
 		this.memoryLog = memoryLog;
+	}
+
+	public void setError(String string) {
+		this.error=string;		
+	}
+
+	public String getError() {
+		return error;
 	}
 
 }
