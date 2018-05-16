@@ -25,13 +25,13 @@ public class SSHCommandExecutor {
 		Map<String, List<String>> ipAddressMap = new HashMap<>();
 		List<String> list = new ArrayList<>();
 		list.add("a");
-		
+
 		List<String> list2 = new ArrayList<>();
 		list2.add("b");
-		
+
 		ipAddressMap.put("a", list);
 		ipAddressMap.put("b", list2);
-	//	 ipAddressMap.put("c", list);
+		// ipAddressMap.put("c", list);
 
 		final ExecutorService service = Executors.newCachedThreadPool();
 		final List<FutureTask<ExecutionResult>> taskList = new ArrayList<FutureTask<ExecutionResult>>();
@@ -47,11 +47,14 @@ public class SSHCommandExecutor {
 			try {
 				ExecutionResult executionResult = future.get();
 				String ipAddress = executionResult.getIpAddress();
-				
+
 				List<String> originalExcelRow = ipAddressMap.get(ipAddress);
-				System.out.println("Result-->"+ipAddress+"--"+executionResult.getError()+"--"+originalExcelRow);
+				originalExcelRow.add(executionResult.getCupStatus());
+				originalExcelRow.add(executionResult.getCupLog());
+				originalExcelRow.add(executionResult.getMemoryStatus());
+				originalExcelRow.add(executionResult.getMemoryLog());
 				originalExcelRow.add(executionResult.getError());
-				
+
 				ipAddressMap.put(ipAddress, originalExcelRow);
 
 			} catch (InterruptedException | ExecutionException e) {
