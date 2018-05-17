@@ -1,18 +1,16 @@
 package office;
 
 public class ExecutionResult {
-	String ipAddress;
-	String cupStatus;
-	String cupLog;
+	private String ipAddress;
+	private String cupStatus;
+	private String cupLog;
 
-	String memoryStatus;
-	String memoryLog;
+	private String memoryStatus;
+	private String memoryLog;
 	private String error;
 
-	
-	
 	public ExecutionResult(String ipAddress, String error) {
-		
+
 		this.ipAddress = ipAddress;
 		this.error = error;
 	}
@@ -58,7 +56,7 @@ public class ExecutionResult {
 	}
 
 	public void setError(String string) {
-		this.error=string;		
+		this.error = string;
 	}
 
 	public String getError() {

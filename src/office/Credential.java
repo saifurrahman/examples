@@ -1,14 +1,14 @@
 package office;
 
 public class Credential {
-	String userName;
-	String password;
+	private String userName;
+	private String password;
 
 	public Credential(String userName, String password) {
 
 		this.userName = userName;
 		this.password = password;
-		
+
 	}
 
 	public String getUserName() {
@@ -27,5 +27,4 @@ public class Credential {
 		this.password = password;
 	}
 
-	
 }

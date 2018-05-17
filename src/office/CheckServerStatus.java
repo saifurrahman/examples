@@ -53,7 +53,7 @@ public class CheckServerStatus implements Callable<ExecutionResult> {
 			} finally {
 				result = new ExecutionResult(ipAddress, error);
 			}
-		}else {
+		} else {
 			error = "Session not able to connect";
 			result = new ExecutionResult(ipAddress, error);
 		}
@@ -65,20 +65,20 @@ public class CheckServerStatus implements Callable<ExecutionResult> {
 		Session session = null;
 
 		JSch jSch = new JSch();
-		// System.out.println(credentials.get(0).getUserName());
-		// System.out.println(credentials.get(1).getUserName());
-		session = getTrySession(ipAddress2, credentials.get(0), session, jSch);
+		session = getTrySession(ipAddress2, credentials.get(0));
 		if (ifAuthFailed) {
-			session = getTrySession(ipAddress2, credentials.get(1), session, jSch);
+			session = getTrySession(ipAddress2, credentials.get(1));
 
-		}else {
-			System.out.println("Retruning session-->"+session.isConnected());
+		} else {
+			System.out.println("Retruning session-->" + session.isConnected());
 		}
 		return session;
 	}
 
-	private Session getTrySession(String ipAddress2, Credential credentials, Session session, JSch jSch) {
+	private Session getTrySession(String ipAddress2, Credential credentials) {
 
+		Session session = null;
+		JSch jSch = new JSch();
 		System.out.println("trying session for -->" + ipAddress2 + ":" + credentials.getUserName());
 		try {
 			session = jSch.getSession(credentials.getUserName(), ipAddress2);
@@ -88,14 +88,14 @@ public class CheckServerStatus implements Callable<ExecutionResult> {
 			Thread.sleep(3000);
 
 		} catch (JSchException e) {
-			ifAuthFailed=true;
+			ifAuthFailed = true;
 			error = "Error Msg:" + e.getMessage();
 			// e.printStackTrace();
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		ifAuthFailed=true;
+		ifAuthFailed = true;
 		return session;
 	}
 
